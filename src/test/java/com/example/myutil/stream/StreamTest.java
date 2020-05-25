@@ -1,5 +1,6 @@
 package com.example.myutil.stream;
 
+import com.example.myutil.base.BaseTest;
 import com.example.myutil.stream.bean.User;
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,11 +11,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@SpringBootTest
-// 下面两个注解是web环境才需要
-//@RunWith(SpringRunner.class)
-//@WebAppConfiguration
-public class StreamTest {
+
+public class StreamTest extends BaseTest {
 
     /**
      *   无限流创建对象
@@ -128,9 +126,10 @@ public class StreamTest {
         users.stream()
                 .map(User::getMoney)
                 .forEach(System.out::println);
-//        [1元, 5元]
-//[10元, 50元]
-//[100元]
+        // 结果
+        //        [1元, 5元]
+        //[10元, 50元]
+        //[100元]
 
     }
 
