@@ -1,5 +1,6 @@
 package com.example.myutil.stream.bean;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
@@ -9,6 +10,9 @@ public class User implements Comparable<User>{
     Integer age;
     String name;
     List<String> money;
+
+    public User() {
+    }
 
     public User(int age, String name) {
         this.age = age;

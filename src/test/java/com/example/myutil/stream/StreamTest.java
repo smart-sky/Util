@@ -6,6 +6,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.validation.ConstraintViolation;
+import java.math.BigDecimal;
+import java.net.InetAddress;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -207,6 +210,117 @@ public class StreamTest extends BaseTest {
         users.add(new User(21,"C", Collections.singletonList("100元")));
 
         System.out.println(users.stream().count());
+    }
+
+    /**
+     * 求和，求最小，求最大
+     */
+    @Test
+    public void sum(){
+        // 去重流
+        List<User> users = new ArrayList<>();
+        users.add(new User(15,"A", Arrays.asList("1元","5元")));
+        users.add(new User(25,"B",Arrays.asList("10元","50元")));
+        users.add(new User(21,"C", Collections.singletonList("100元")));
+
+//        resList.stream().map(BillMachOrderRes::getMachUseWeight).reduce(BigDecimal::add).get()
+        Integer sum = users.stream().map(User::getAge).reduce(Integer::sum).get();
+        Integer max = users.stream().map(User::getAge).reduce(Integer::max).get();
+        Integer min = users.stream().map(User::getAge).reduce(Integer::min).get();
+        System.out.println(sum);
+        System.out.println(max);
+        System.out.println(min);
+    }
+
+    /**
+     * 设置值
+     */
+    @Test
+    public void setNumber(){
+        // 去重流
+        List<User> users = new ArrayList<>();
+        users.add(new User(15,"A", Arrays.asList("1元","5元")));
+        users.add(new User(25,"B",Arrays.asList("10元","50元")));
+        users.add(new User(21,"C", Collections.singletonList("100元")));
+
+//        resList.stream().map(BillMachOrderRes::getMachUseWeight).reduce(BigDecimal::add).get()
+        Integer sum = users.stream().map(User::getAge).reduce(Integer::sum).get();
+        Integer max = users.stream().map(User::getAge).reduce(Integer::max).get();
+        Integer min = users.stream().map(User::getAge).reduce(Integer::min).orElse(0);
+
+        User user = new User();
+        users.stream().map(User::getAge).reduce(Integer::sum).ifPresent(user::setAge);
+        System.out.println(user.toString());
+
+        System.out.println(sum);
+        System.out.println(max);
+        System.out.println(min);
+    }
+
+
+    /**
+     * 设置值
+     */
+    @Test
+    public void toIntegerList(){
+        // 去重流
+        List<User> users = new ArrayList<>();
+        users.add(new User(15,"A", Arrays.asList("1元","5元")));
+        users.add(new User(25,"B",Arrays.asList("10元","50元")));
+        users.add(new User(21,"C", Collections.singletonList("100元")));
+
+        Integer[] isMust = users.stream().map(User::getAge).toArray(Integer[]::new);
+        Arrays.stream(isMust).forEach(System.out::println);
+
+    }
+
+
+    /**
+     * 设置值
+     */
+    @Test
+    public void onlyInt(){
+        // 去重流
+        List<User> users = new ArrayList<>();
+        users.add(new User(15,"A", Arrays.asList("1元","5元")));
+        users.add(new User(25,"B",Arrays.asList("10元","50元")));
+        users.add(new User(21,"C", Collections.singletonList("100元")));
+
+        int sum = users.stream().mapToInt(User::getAge).sum();
+//        Arrays.stream(isMust).forEach(System.out::println);
+        System.out.println(sum);
+    }
+
+    /**
+     * 以分割符组合字符串
+     */
+    @Test
+    public void joiningStr(){
+        // 去重流
+        List<User> users = new ArrayList<>();
+        users.add(new User(15,"A", Arrays.asList("1元","5元")));
+        users.add(new User(25,"B",Arrays.asList("10元","50元")));
+        users.add(new User(21,"C", Collections.singletonList("100元")));
+
+        String message = users.stream().map(User::getName).collect(Collectors.joining(";"));
+
+        System.out.println(message);
+    }
+
+    /**
+     * 组合使用
+     */
+    @Test
+    public void manyUse1(){
+        // 去重流
+        List<User> users = new ArrayList<>();
+        users.add(new User(15,"A", Arrays.asList("1元","5元")));
+        users.add(new User(25,"B",Arrays.asList("10元","50元")));
+        users.add(new User(21,"C", Collections.singletonList("100元")));
+
+        List<String> result = users.stream().map(User::getName).distinct().map(String::toLowerCase).collect(Collectors.toList());
+
+        System.out.println(result);
     }
 
 }
