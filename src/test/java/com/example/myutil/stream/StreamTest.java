@@ -62,7 +62,7 @@ public class StreamTest extends BaseTest {
         users.add(new User(15,"A"));
         users.add(new User(25,"B"));
         users.add(new User(21,"C"));
-        users.stream().sorted(Comparator.comparing(User::getAge))
+        users.stream().sorted(Comparator.comparing(User::getAge).reversed())
                 .forEach(user -> System.out.println(user.getName()));
     }
 

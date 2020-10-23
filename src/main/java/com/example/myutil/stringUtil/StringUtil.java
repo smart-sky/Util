@@ -1,5 +1,6 @@
 package com.example.myutil.stringUtil;
 
+import com.example.exception.ResultException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -254,5 +255,48 @@ public class StringUtil extends StringUtils {
             }
         }
         return null;
+    }
+
+    public static Double stringToDouble (String doubleNumber, String message) {
+        if (StringUtils.isEmpty(doubleNumber)) {
+            return null;
+        }
+        try {
+            return Double.parseDouble(doubleNumber);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            throw new ResultException(message);
+        }
+    }
+
+    public static Integer stringToInteger (String intNumber, String message) {
+        if (StringUtils.isEmpty(intNumber)) {
+            return null;
+        }
+        try {
+            return Integer.parseInt(intNumber);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            throw new ResultException(message);
+        }
+    }
+
+    public static String doubleToString (Double doubleNumber, String message) {
+        if (doubleNumber == null) {
+            return "";
+        }
+        try {
+            return doubleNumber.toString();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            throw new ResultException(message);
+        }
+    }
+
+    public static String nullToEmtry (String str) {
+        if (str == null) {
+            return "";
+        }
+        return str;
     }
 }
