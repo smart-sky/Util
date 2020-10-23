@@ -2,13 +2,8 @@ package com.example.myutil.stream;
 
 import com.example.myutil.base.BaseTest;
 import com.example.myutil.stream.bean.User;
-import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.validation.ConstraintViolation;
-import java.math.BigDecimal;
-import java.net.InetAddress;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
