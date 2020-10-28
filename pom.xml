@@ -76,6 +76,12 @@
             <artifactId>httpclient</artifactId>
             <version>4.5.5</version>
         </dependency>
+<!--        工具库-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>4.1.0</version>
+        </dependency>
     </dependencies>
 
 
